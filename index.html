@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRD — Affiliate Link & Commission Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['Sora', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+          colors: {
+            ink: '#0e1116', paper: '#f7f6f2',
+            brand: { DEFAULT: '#0f5c4d', soft: '#16876f', glow: '#1fc79f' },
+            amber: { DEFAULT: '#d97706' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f7f6f2;
+    }
+
+    .prose-block h3 {
+      font-family: 'Sora';
+      font-weight: 700;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cfcbc0;
+      border-radius: 6px;
+    }
+
+    .nav-link.active {
+      background: #0f5c4d;
+      color: #fff;
+    }
+
+    .nav-link.active svg {
+      color: #1fc79f;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .tbl th {
+      background: #0f5c4d;
+      color: #fff;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .tbl td {
+      border-bottom: 1px solid #e7e4db;
+      padding: 10px 14px;
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    .tbl tr:last-child td {
+      border-bottom: none;
+    }
+
+    .code {
+      background: #0e1116;
+      color: #9be8d2;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      border-radius: 14px;
+      padding: 18px 20px;
+      overflow: auto;
+    }
+
+    .chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 999px;
+      letter-spacing: .02em;
+    }
+
+    details>summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    details>summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="font-body text-ink antialiased">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex flex-col w-72 shrink-0 bg-ink text-paper sticky top-0 h-screen p-7 overflow-y-auto">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-brand-glow flex items-center justify-center">
+          <i data-lucide="link-2" class="w-5 h-5 text-ink"></i>
+        </div>
+        <div>
+          <p class="font-display font-extrabold leading-none text-[15px]">Affiliate PRD</p>
+          <p class="text-[11px] text-white/40 mt-1">v1.0 · 2026</p>
+        </div>
+      </div>
+      <nav class="flex flex-col gap-1 text-sm" id="nav">
+        <a href="#overview"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="compass" class="w-4 h-4"></i> Tổng quan</a>
+        <a href="#core"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="layout-grid" class="w-4 h-4"></i> Module gốc</a>
+        <a href="#data"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="database" class="w-4 h-4"></i> Mô hình dữ liệu</a>
+        <p class="text-[10px] uppercase tracking-widest text-white/30 px-3 mt-5 mb-1">Module mở rộng</p>
+        <a href="#mod-a"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="user-plus" class="w-4 h-4"></i> A · Đăng ký CTV</a>
+        <a href="#mod-b"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="bar-chart-3" class="w-4 h-4"></i> B · Dashboard</a>
+        <a href="#mod-c"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="layout-template" class="w-4 h-4"></i> C · Landing page</a>
+        <p class="text-[10px] uppercase tracking-widest text-white/30 px-3 mt-5 mb-1">Kế hoạch</p>
+        <a href="#roadmap"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="route" class="w-4 h-4"></i> Roadmap</a>
+        <a href="#accept"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white transition"><i
+            data-lucide="check-check" class="w-4 h-4"></i> Nghiệm thu</a>
+      </nav>
+      <div class="mt-auto pt-6 text-[11px] text-white/35 leading-relaxed">
+        Next.js 16 · Firebase<br>Tailwind · Recharts<br>Ngô Thanh Tùng — Softech
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 min-w-0">
+
+      <!-- Hero -->
+      <header class="relative overflow-hidden bg-ink text-paper px-6 sm:px-12 py-16">
+        <div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-brand-glow/20 blur-3xl"></div>
+        <div class="absolute right-40 bottom-0 w-72 h-72 rounded-full bg-brand-soft/20 blur-3xl"></div>
+        <div class="relative max-w-4xl">
+          <span class="chip bg-brand-glow/20 text-brand-glow">PRODUCT REQUIREMENTS DOCUMENT</span>
+          <h1 class="font-display font-extrabold text-4xl sm:text-5xl mt-5 leading-tight">Affiliate Link &amp;<br>Commission
+            Manager</h1>
+          <p class="text-white/60 mt-5 max-w-2xl text-[15px] leading-relaxed">Công cụ web quản lý link affiliate, theo dõi
+            click/conversion và tính hoa hồng — từ phiên bản cá nhân (single-tenant) tới nền tảng đa vai trò có cộng tác viên,
+            dashboard và landing page.</p>
+          <div class="flex flex-wrap gap-2.5 mt-7 text-[13px]">
+            <span class="px-3 py-1.5 rounded-full bg-white/10">Next.js 14 App Router</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/10">Firebase Auth · Firestore</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/10">TailwindCSS</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/10">Recharts</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="px-6 sm:px-12 py-12 max-w-4xl mx-auto space-y-16 prose-block">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="compass" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">1 · Tổng quan</h2>
+          </div>
+          <p class="text-[15px] leading-relaxed text-ink/80">App web cá nhân để <b>quản lý link affiliate và theo dõi hoa
+              hồng</b>. Người dùng tạo link tiếp thị, gắn vào chiến dịch, hệ thống tự sinh short-link redirect, đếm click và ghi
+            nhận conversion, từ đó tính hoa hồng kỳ vọng và thực nhận. Khi mở rộng, app chuyển sang nền tảng đa vai trò có cộng
+            tác viên.</p>
+
+          <div class="grid sm:grid-cols-3 gap-4 mt-7">
+            <div class="bg-white rounded-2xl p-5 border border-ink/5 shadow-sm">
+              <i data-lucide="target" class="w-5 h-5 text-brand mb-3"></i>
+              <p class="font-display font-bold text-sm mb-1">Mục tiêu</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Tập trung mọi link, biết link nào ra tiền, tính hoa hồng tự
+                động, báo cáo theo tháng/chiến dịch.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-ink/5 shadow-sm">
+              <i data-lucide="users" class="w-5 h-5 text-brand mb-3"></i>
+              <p class="font-display font-bold text-sm mb-1">Vai trò</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Admin/Owner duyệt CTV &amp; set hoa hồng. Affiliate lấy link
+                riêng. Visitor bấm link không cần login.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-ink/5 shadow-sm">
+              <i data-lucide="x-circle" class="w-5 h-5 text-amber mb-3"></i>
+              <p class="font-display font-bold text-sm mb-1">Ngoài phạm vi v1</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Tự crawl hoa hồng từ nền tảng, đối soát thanh toán tự động với
+                nhà cung cấp.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CORE -->
+        <section id="core" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="layout-grid" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">2 · Module gốc — Quản lý link &amp; hoa hồng</h2>
+          </div>
+          <div class="space-y-3">
+            <details open class="bg-white rounded-xl border border-ink/5 overflow-hidden">
+              <summary class="flex items-center justify-between px-5 py-4 font-semibold text-sm"><span
+                  class="flex items-center gap-2.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand"></i> Xác thực &amp;
+                  Quản lý Link (CRUD)</span><i data-lucide="chevron-down" class="w-4 h-4 text-ink/30"></i></summary>
+              <div class="px-5 pb-5 text-[14px] text-ink/70 leading-relaxed border-t border-ink/5 pt-4">
+                Đăng nhập Google / email-password (Firebase Auth), bảo vệ route dashboard. Mỗi link gồm: tiêu đề, link gốc,
+                <code class="text-brand">slug</code> tự sinh, nền tảng (Shopee/Lazada/Tiki/Accesstrade), chiến dịch, % hoa hồng,
+                giá sản phẩm, trạng thái.
+              </div>
+            </details>
+            <details class="bg-white rounded-xl border border-ink/5 overflow-hidden">
+              <summary class="flex items-center justify-between px-5 py-4 font-semibold text-sm"><span
+                  class="flex items-center gap-2.5"><i data-lucide="mouse-pointer-click" class="w-4 h-4 text-brand"></i>
+                  Short-link Redirect &amp; Tracking</span><i data-lucide="chevron-down" class="w-4 h-4 text-ink/30"></i>
+              </summary>
+              <div class="px-5 pb-5 text-[14px] text-ink/70 leading-relaxed border-t border-ink/5 pt-4">
+                Route <code class="text-brand">/r/[slug]</code> ghi 1 bản ghi click rồi redirect 302 sang link gốc. Mỗi click
+                lưu referrer, userAgent, country (best-effort). Dedupe theo IP+UA trong cửa sổ ngắn.
+              </div>
+            </details>
+            <details class="bg-white rounded-xl border border-ink/5 overflow-hidden">
+              <summary class="flex items-center justify-between px-5 py-4 font-semibold text-sm"><span
+                  class="flex items-center gap-2.5"><i data-lucide="coins" class="w-4 h-4 text-brand"></i> Conversion &amp; Hoa
+                  hồng</span><i data-lucide="chevron-down" class="w-4 h-4 text-ink/30"></i></summary>
+              <div class="px-5 pb-5 text-[14px] text-ink/70 leading-relaxed border-t border-ink/5 pt-4">
+                Nhập tay hoặc import CSV (đối soát Accesstrade/Shopee). Tự tính <code class="text-brand">commissionAmount =
+                  orderValue × commissionRate</code> nếu không nhập tay. Trạng thái: pending / confirmed / rejected.
+              </div>
+            </details>
+            <details class="bg-white rounded-xl border border-ink/5 overflow-hidden">
+              <summary class="flex items-center justify-between px-5 py-4 font-semibold text-sm"><span
+                  class="flex items-center gap-2.5"><i data-lucide="folder-kanban" class="w-4 h-4 text-brand"></i> Chiến dịch
+                  &amp; Dashboard</span><i data-lucide="chevron-down" class="w-4 h-4 text-ink/30"></i></summary>
+              <div class="px-5 pb-5 text-[14px] text-ink/70 leading-relaxed border-t border-ink/5 pt-4">
+                Gom nhóm nhiều link thành chiến dịch (goal, thời gian). Dashboard: tổng click/conversion, CR%, hoa hồng pending
+                vs confirmed, biểu đồ click theo ngày, hoa hồng theo nền tảng, top link theo doanh thu.
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- DATA -->
+        <section id="data" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="database" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">3 · Mô hình dữ liệu (Firestore)</h2>
+          </div>
+          <pre class="code">users/{uid}
+            links/{linkId} { title, originalUrl, slug, platform, campaignId,
+            commissionRate, productPrice, status, clickCount,
+            createdAt, updatedAt }
+            clicks/{clickId} { linkId, timestamp, referrer, userAgent, country }
+            conversions/{convId} { linkId, orderValue, commissionAmount, status, date }
+            campaigns/{campId} { name, description, startDate, endDate, goal }
+
+            slugIndex/{slug} { uid, linkId } // tra cứu nhanh khi redirect</pre>
+          <p class="text-[13px] text-ink/55 mt-3 flex items-start gap-2"><i data-lucide="info"
+              class="w-4 h-4 mt-0.5 shrink-0 text-brand"></i> <code class="text-brand">slugIndex</code> đặt ở top-level để route
+            <code class="text-brand">/r/[slug]</code> resolve được mà không cần biết uid trước.
+          </p>
+        </section>
+
+        <!-- MODULE A -->
+        <section id="mod-a" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="chip bg-brand/10 text-brand">MODULE A</span>
+          </div>
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="user-plus" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">Trang đăng ký Affiliate cho CTV</h2>
+          </div>
+          <p class="text-[15px] text-ink/80 leading-relaxed mb-6">Cho phép cộng tác viên tự đăng ký, admin duyệt, CTV nhận link
+            tiếp thị riêng để kiếm hoa hồng.</p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="file-plus"
+                  class="w-4 h-4 text-brand"></i> Đăng ký CTV (public)</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Form: họ tên, email, SĐT, kênh quảng bá, lý do. Tạo Auth +
+                <code class="text-brand">affiliates/{uid}</code> status=pending, gửi email xác nhận.
+              </p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="user-check"
+                  class="w-4 h-4 text-brand"></i> Duyệt CTV (admin)</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Danh sách đơn, lọc theo status, duyệt/từ chối kèm lý do, gửi
+                thông báo kết quả.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="store"
+                  class="w-4 h-4 text-brand"></i> Khu vực CTV</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Xem sản phẩm khả dụng + % hoa hồng, tạo link riêng (slug gắn
+                affiliateId), thống kê cá nhân, hồ sơ nhận tiền.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="wallet"
+                  class="w-4 h-4 text-brand"></i> Hoa hồng &amp; Payout (admin)</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Xem hoa hồng từng CTV theo kỳ, đánh dấu thanh toán (<code
+                  class="text-brand">payouts</code>), lịch sử thanh toán.</p>
+            </div>
+          </div>
+          <pre class="code mt-5">affiliates/{uid} { name, email, phone, channel, note, status, payoutInfo, ... }
+            products/{productId} { name, description, imageUrl, price, commissionRate, status }
+            referralLinks/{id} { affiliateId, productId, slug, clickCount, createdAt }
+            payouts/{id} { affiliateId, period, amount, status, paidAt }</pre>
+        </section>
+
+        <!-- MODULE B -->
+        <section id="mod-b" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-2"><span class="chip bg-brand/10 text-brand">MODULE B</span></div>
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="bar-chart-3" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">Dashboard Tracking Click/Conversion</h2>
+          </div>
+          <p class="text-[15px] text-ink/80 leading-relaxed mb-6">Trung tâm phân tích: admin thấy toàn hệ thống, CTV chỉ thấy dữ
+            liệu của mình.</p>
+          <div class="grid sm:grid-cols-2 gap-4 mb-5">
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="gauge"
+                  class="w-4 h-4 text-brand"></i> KPI cards</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Tổng click, conversion, CR%, hoa hồng (pending/confirmed/đã
+                trả), <b>EPC</b> (earning per click), so sánh % kỳ trước.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="line-chart"
+                  class="w-4 h-4 text-brand"></i> Biểu đồ</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Line click/conversion theo ngày, bar hoa hồng theo nền tảng/sản
+                phẩm, top 10 link/CTV, funnel Click→Conversion→Confirmed.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="table"
+                  class="w-4 h-4 text-brand"></i> Bảng dữ liệu</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Click chi tiết (thời gian, referrer, thiết bị, quốc gia) +
+                conversion, sắp xếp/phân trang/lọc.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="filter"
+                  class="w-4 h-4 text-brand"></i> Tracking engine</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Ghi click async + redirect 302, parse thiết bị/OS/browser,
+                dedupe (IP+UA, 30'), tăng clickCount bằng <code class="text-brand">increment()</code>.</p>
+            </div>
+          </div>
+          <pre class="code">clicks/{id} { slug, linkId, affiliateId, timestamp, referrer,
+            device, os, browser, country, ipHash }
+            conversions/{id} { linkId, affiliateId, productId, orderValue,
+            commissionAmount, status, date }</pre>
+          <p class="text-[13px] text-ink/55 mt-3 flex items-start gap-2"><i data-lucide="shield"
+              class="w-4 h-4 mt-0.5 shrink-0 text-brand"></i> <code class="text-brand">ipHash</code> = hash(IP) để dedupe mà
+            không lưu IP thô — bảo vệ quyền riêng tư.</p>
+        </section>
+
+        <!-- MODULE C -->
+        <section id="mod-c" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-2"><span class="chip bg-brand/10 text-brand">MODULE C</span></div>
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="layout-template" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">Landing Page giới thiệu sản phẩm + Link</h2>
+          </div>
+          <p class="text-[15px] text-ink/80 leading-relaxed mb-6">Trang public đẹp, tải nhanh, SEO tốt. Mỗi CTV có
+            landing/storefront riêng theo affiliateId.</p>
+          <div class="grid sm:grid-cols-2 gap-4 mb-5">
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="package"
+                  class="w-4 h-4 text-brand"></i> Trang sản phẩm</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Ảnh, tên, mô tả, giá, CTA → <code
+                  class="text-brand">/r/[slug]</code> track click rồi redirect. SEO: meta + OG image.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="link"
+                  class="w-4 h-4 text-brand"></i> Landing theo CTV</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed"><code class="text-brand">/p/[slug]?ref=[affiliateId]</code>
+                hoặc <code class="text-brand">/u/[affiliateId]</code> — gán hoa hồng đúng CTV, storefront mini nhiều sản phẩm.
+              </p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="edit-3"
+                  class="w-4 h-4 text-brand"></i> Tùy biến nội dung</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Admin tạo/sửa sản phẩm (ảnh qua Storage, rich text, badge KM).
+                CTV chọn sản phẩm hiển thị.</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm flex items-center gap-2 mb-2"><i data-lucide="mail"
+                  class="w-4 h-4 text-brand"></i> Thu lead (optional)</p>
+              <p class="text-[13px] text-ink/60 leading-relaxed">Form nhận ưu đãi (email/SĐT) → lưu <code
+                  class="text-brand">leads</code> cho remarketing thủ công.</p>
+            </div>
+          </div>
+          <p class="text-[13px] text-ink/55 flex items-start gap-2"><i data-lucide="zap"
+              class="w-4 h-4 mt-0.5 shrink-0 text-brand"></i> Landing render SSR/ISR cho SEO &amp; tốc độ, ảnh tối ưu qua <code
+              class="text-brand">next/image</code>, mục tiêu Lighthouse Performance &gt; 90.</p>
+        </section>
+
+        <!-- ROADMAP -->
+        <section id="roadmap" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="route" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">4 · Roadmap tổng</h2>
+          </div>
+          <div class="overflow-hidden rounded-2xl border border-ink/5 shadow-sm">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Module</th>
+                  <th>Nội dung</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="chip bg-brand/10 text-brand">v1.0</span></td>
+                  <td>Gốc</td>
+                  <td>Quản lý link &amp; hoa hồng cá nhân</td>
+                </tr>
+                <tr>
+                  <td><span class="chip bg-brand/10 text-brand">v1.1</span></td>
+                  <td>A</td>
+                  <td>Đăng ký CTV + duyệt + khu vực CTV</td>
+                </tr>
+                <tr>
+                  <td><span class="chip bg-brand/10 text-brand">v1.2</span></td>
+                  <td>B</td>
+                  <td>Dashboard tracking đầy đủ + dedupe + phân quyền view</td>
+                </tr>
+                <tr>
+                  <td><span class="chip bg-brand/10 text-brand">v1.3</span></td>
+                  <td>C</td>
+                  <td>Landing page + storefront CTV + SEO</td>
+                </tr>
+                <tr>
+                  <td><span class="chip bg-brand/10 text-brand">v1.4</span></td>
+                  <td>A</td>
+                  <td>Payout &amp; đối soát hoa hồng CTV</td>
+                </tr>
+                <tr>
+                  <td><span class="chip bg-amber/10 text-amber">v2.0</span></td>
+                  <td>—</td>
+                  <td>Postback tự động, gợi ý tối ưu bằng AI, thông báo realtime</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ACCEPTANCE -->
+        <section id="accept" class="scroll-mt-8">
+          <div class="flex items-center gap-3 mb-5">
+            <i data-lucide="check-check" class="w-6 h-6 text-brand"></i>
+            <h2 class="font-display font-extrabold text-2xl">5 · Tiêu chí nghiệm thu</h2>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div class="bg-white rounded-2xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm mb-3 flex items-center gap-2"><span
+                  class="chip bg-brand/10 text-brand">A</span> Đăng ký CTV</p>
+              <ul class="space-y-2 text-[13px] text-ink/70">
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> CTV đăng ký →
+                  pending; admin duyệt/từ chối</li>
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> Link riêng gắn đúng
+                  affiliateId</li>
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> Payout &amp; lịch
+                  sử thanh toán</li>
+              </ul>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm mb-3 flex items-center gap-2"><span
+                  class="chip bg-brand/10 text-brand">B</span> Dashboard</p>
+              <ul class="space-y-2 text-[13px] text-ink/70">
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> KPI &amp; biểu đồ
+                  đúng số liệu, lọc theo thời gian/CTV</li>
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> Dedupe click trong
+                  30' không tính 2 lần</li>
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> CTV chỉ thấy dữ
+                  liệu của mình</li>
+              </ul>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-ink/5">
+              <p class="font-display font-bold text-sm mb-3 flex items-center gap-2"><span
+                  class="chip bg-brand/10 text-brand">C</span> Landing page</p>
+              <ul class="space-y-2 text-[13px] text-ink/70">
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> Hiển thị sản phẩm,
+                  CTA track click đúng</li>
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> <code
+                    class="text-brand">?ref</code> gán hoa hồng đúng CTV</li>
+                <li class="flex gap-2"><i data-lucide="circle" class="w-3.5 h-3.5 mt-0.5 text-brand/40"></i> Storefront &amp;
+                  form lead lưu Firestore</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <footer class="pt-10 border-t border-ink/10 text-[13px] text-ink/45 flex flex-wrap items-center justify-between gap-3">
+          <span>PRD · Affiliate Link &amp; Commission Manager · v1.0</span>
+          <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Tony — Softech Aptech Đà
+            Nẵng</span>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    // Scroll-spy
+    const links = document.querySelectorAll('.nav-link');
+    const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+    const spy = () => {
+      let cur = sections[0];
+      const y = window.scrollY + 120;
+      sections.forEach(s => { if (s && s.offsetTop <= y) cur = s; });
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur.id));
+    };
+    window.addEventListener('scroll', spy); spy();
+  </script>
+</body>
+
+</html>
