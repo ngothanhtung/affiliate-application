@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo giá — Affiliate Link & Commission Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['Sora', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+          colors: { ink: '#0e1116', paper: '#f7f6f2', brand: { DEFAULT: '#0f5c4d', soft: '#16876f', glow: '#1fc79f' } }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-body text-ink bg-paper antialiased">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+
+    <!-- Header -->
+    <header class="text-center mb-10">
+      <h1 class="font-display font-extrabold text-3xl text-brand">BÁO GIÁ</h1>
+      <p class="text-xl font-display font-bold mt-2">Hệ thống Quản lý Link Affiliate &amp; Hoa hồng</p>
+      <p class="text-sm text-ink/50 mt-1">Next.js 14 · Firebase · TailwindCSS · Recharts</p>
+      <div class="mt-4 flex justify-center gap-3 text-xs text-ink/50">
+        <span>Phiên bản: v1.0</span>
+        <span>•</span>
+        <span>Ngày: 06/2026</span>
+        <span>•</span>
+        <span>Đơn vị: Softech Aptech</span>
+      </div>
+    </header>
+
+    <!-- Mô tả -->
+    <section class="mb-10">
+      <p class="text-sm leading-relaxed text-ink/70">Ứng dụng web quản lý link affiliate, theo dõi click/conversion và tự động tính hoa hồng. Hệ thống phát triển từ phiên bản cá nhân lên nền tảng đa vai trò với cộng tác viên, dashboard phân tích và landing page.</p>
+    </section>
+
+    <!-- Module -->
+    <section class="mb-10">
+      <h2 class="font-display font-bold text-lg mb-4">Phạm vi — 4 module triển khai tuần tự</h2>
+      <div class="grid gap-3">
+        <div class="bg-white rounded-xl border border-ink/5 p-4 flex items-start gap-4">
+          <span class="chip shrink-0 mt-0.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand/10 text-brand">D · CORE</span>
+          <div>
+            <p class="font-semibold text-sm">Quản lý link &amp; hoa hồng</p>
+            <p class="text-[13px] text-ink/60 mt-0.5">CRUD link, short-link tự động, redirect tracking /r/[slug] → 302, ghi click/conversion, tự tính hoa hồng, chiến dịch, dashboard cơ bản.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-ink/5 p-4 flex items-start gap-4">
+          <span class="chip shrink-0 mt-0.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand/10 text-brand">A</span>
+          <div>
+            <p class="font-semibold text-sm">Đăng ký CTV</p>
+            <p class="text-[13px] text-ink/60 mt-0.5">Form đăng ký public, admin duyệt/từ chối, khu vực CTV riêng, tạo link, thống kê cá nhân, quản lý payout &amp; lịch sử thanh toán.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-ink/5 p-4 flex items-start gap-4">
+          <span class="chip shrink-0 mt-0.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand/10 text-brand">B</span>
+          <div>
+            <p class="font-semibold text-sm">Dashboard tracking</p>
+            <p class="text-[13px] text-ink/60 mt-0.5">KPI cards, biểu đồ Recharts (line/bar/top10/funnel), bảng click &amp; conversion, lọc đa chiều, dedupe click, phân quyền dữ liệu tự động.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-ink/5 p-4 flex items-start gap-4">
+          <span class="chip shrink-0 mt-0.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand/10 text-brand">C</span>
+          <div>
+            <p class="font-semibold text-sm">Landing page</p>
+            <p class="text-[13px] text-ink/60 mt-0.5">Trang sản phẩm SSR/ISR chuẩn SEO, storefront riêng theo CTV (/u/[id] hoặc ?ref=), form thu lead, quản lý sản phẩm, tối ưu hình ảnh.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lộ trình -->
+    <section class="mb-10">
+      <h2 class="font-display font-bold text-lg mb-4">Lộ trình phát hành</h2>
+      <table class="w-full text-sm border-separate" style="border-spacing: 0 4px;">
+        <thead>
+          <tr class="[&_th]:text-left [&_th]:text-[11px] [&_th]:uppercase [&_th]:tracking-wider [&_th]:text-ink/40 [&_th]:pb-1">
+            <th class="w-20">Phiên bản</th>
+            <th class="w-20">Module</th>
+            <th>Nội dung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white rounded-xl [&_td]:p-3 [&_td]:border-b [&_td]:border-ink/5 first:[&_td]:rounded-l-lg last:[&_td]:rounded-r-lg">
+            <td class="font-semibold text-brand">v1.0</td><td>Gốc</td><td class="text-ink/60">Quản lý link &amp; hoa hồng cá nhân</td>
+          </tr>
+          <tr class="bg-white rounded-xl [&_td]:p-3 [&_td]:border-b [&_td]:border-ink/5">
+            <td class="font-semibold text-brand">v1.1</td><td>A</td><td class="text-ink/60">Đăng ký CTV + duyệt + khu vực CTV</td>
+          </tr>
+          <tr class="bg-white rounded-xl [&_td]:p-3 [&_td]:border-b [&_td]:border-ink/5">
+            <td class="font-semibold text-brand">v1.2</td><td>B</td><td class="text-ink/60">Dashboard tracking + dedupe + phân quyền view</td>
+          </tr>
+          <tr class="bg-white rounded-xl [&_td]:p-3 [&_td]:border-b [&_td]:border-ink/5">
+            <td class="font-semibold text-brand">v1.3</td><td>C</td><td class="text-ink/60">Landing page + storefront CTV + SEO</td>
+          </tr>
+          <tr class="bg-white rounded-xl [&_td]:p-3 [&_td]:border-b [&_td]:border-ink/5">
+            <td class="font-semibold text-brand">v1.4</td><td>A</td><td class="text-ink/60">Payout &amp; đối soát hoa hồng CTV</td>
+          </tr>
+          <tr class="bg-white/60 rounded-xl [&_td]:p-3 text-ink/40">
+            <td class="font-semibold">v2.0</td><td>—</td><td>Postback tự động, gợi ý AI, thông báo realtime</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Yêu cầu kỹ thuật -->
+    <section class="mb-10">
+      <h2 class="font-display font-bold text-lg mb-4">Yêu cầu kỹ thuật chính</h2>
+      <div class="grid sm:grid-cols-2 gap-2 text-sm">
+        <div class="bg-white rounded-lg px-4 py-3 border border-ink/5 flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-brand shrink-0"></span>
+          <span class="text-ink/70">Redirect &lt; 200ms (Vercel Edge)</span>
+        </div>
+        <div class="bg-white rounded-lg px-4 py-3 border border-ink/5 flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-brand shrink-0"></span>
+          <span class="text-ink/70">Lighthouse Performance &gt; 90</span>
+        </div>
+        <div class="bg-white rounded-lg px-4 py-3 border border-ink/5 flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-brand shrink-0"></span>
+          <span class="text-ink/70">Mobile-first, responsive</span>
+        </div>
+        <div class="bg-white rounded-lg px-4 py-3 border border-ink/5 flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-brand shrink-0"></span>
+          <span class="text-ink/70">Hash IP khi lưu — không lưu thô</span>
+        </div>
+        <div class="bg-white rounded-lg px-4 py-3 border border-ink/5 flex items-center gap-3 sm:col-span-2">
+          <span class="w-2 h-2 rounded-full bg-brand shrink-0"></span>
+          <span class="text-ink/70">Dedupe click trùng trong 30 phút (IP hash + UserAgent)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vai trò -->
+    <section class="mb-10">
+      <h2 class="font-display font-bold text-lg mb-4">Vai trò người dùng</h2>
+      <div class="grid sm:grid-cols-3 gap-3 text-sm">
+        <div class="bg-white rounded-xl p-4 border border-ink/5">
+          <p class="font-semibold text-brand">Admin</p>
+          <p class="text-[13px] text-ink/60 mt-1">Quản lý link, chiến dịch, sản phẩm, duyệt CTV, payout — toàn quyền hệ thống.</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-ink/5">
+          <p class="font-semibold text-brand">CTV (Affiliate)</p>
+          <p class="text-[13px] text-ink/60 mt-1">Tự đăng ký, tạo link riêng, xem thống kê, nhận payout — chỉ thấy dữ liệu của mình.</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-ink/5">
+          <p class="font-semibold text-brand">Visitor</p>
+          <p class="text-[13px] text-ink/60 mt-1">Bấm short-link → redirect — không cần tài khoản.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ngoài phạm vi -->
+    <section class="mb-10">
+      <h2 class="font-display font-bold text-lg mb-4">Ngoài phạm vi v1 (v2.0)</h2>
+      <div class="bg-white/60 rounded-xl p-4 border border-ink/5 text-sm text-ink/50">
+        Crawl hoa hồng tự động • Postback URL • Thông báo realtime (WebSocket/FCM) • Gợi ý tối ưu bằng AI
+      </div>
+    </section>
+
+    <footer class="border-t border-ink/10 pt-6 text-center text-xs text-ink/40">
+      <p>PRD · Affiliate Link &amp; Commission Manager · v1.0</p>
+      <p class="mt-1">Ngô Thanh Tùng — Softech Corporation</p>
+    </footer>
+
+  </div>
+</body>
+</html>
